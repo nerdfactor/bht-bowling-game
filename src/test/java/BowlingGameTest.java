@@ -1,4 +1,5 @@
 import eu.nerdfactor.BowlingGame;
+import eu.nerdfactor.TenPointBowlingGame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ class BowlingGameTest {
 	@Test
 	void gameWithoutKnockedOverPinsHasScoreOfZero() {
 		int expectedScore = 0;
-		BowlingGame game = new BowlingGame();
-		for (int i : new int[BowlingGame.AMOUNT_OF_MAX_ROLLS]) {
+		BowlingGame game = new TenPointBowlingGame();
+		for (int i : new int[TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS]) {
 			game.nextRoll(i);
 		}
 		int totalScore = game.countScore();
@@ -27,8 +28,8 @@ class BowlingGameTest {
 	@Test
 	void countTotalScoreOfKnockedOverPins() {
 		int expectedScore = 60;
-		BowlingGame game = new BowlingGame();
-		for (int currentRoll = 1; currentRoll < BowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll++) {
+		BowlingGame game = new TenPointBowlingGame();
+		for (int currentRoll = 1; currentRoll < TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll++) {
 			game.nextRoll(3);
 		}
 		int totalScore = game.countScore();
@@ -43,8 +44,8 @@ class BowlingGameTest {
 	@Test
 	void countTotalScoreOfGameWithAllStrikes() {
 		int expectedScore = 300;
-		int amountOfFrames = BowlingGame.AMOUNT_OF_FRAMES + 2;
-		BowlingGame game = new BowlingGame();
+		int amountOfFrames = TenPointBowlingGame.AMOUNT_OF_FRAMES + 2;
+		BowlingGame game = new TenPointBowlingGame();
 		for (int currentRoll = 0; currentRoll < amountOfFrames; currentRoll++) {
 			game.nextRoll(10);
 		}
@@ -59,8 +60,8 @@ class BowlingGameTest {
 	@Test
 	void countTotalScoreOfRandomKnockedOverPins() {
 		int expectedScore = 0;
-		BowlingGame game = new BowlingGame();
-		for (int currentRoll = 1; currentRoll < BowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll += 2) {
+		BowlingGame game = new TenPointBowlingGame();
+		for (int currentRoll = 1; currentRoll < TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll += 2) {
 			expectedScore += this.rollRandomTestFrame(game);
 		}
 		int totalScore = game.countScore();
@@ -76,7 +77,7 @@ class BowlingGameTest {
 	 * @return The amount of randomly selected knocked over pins.
 	 */
 	private int rollRandomTestFrame(BowlingGame game) {
-		int possibleKnockedOverPinsWithoutStrikes = BowlingGame.AMOUNT_OF_PINS - 1;
+		int possibleKnockedOverPinsWithoutStrikes = TenPointBowlingGame.AMOUNT_OF_PINS - 1;
 		int randomKnockedOverPins = new Random().nextInt(0, possibleKnockedOverPinsWithoutStrikes);
 		int pinsInFirstRoll = randomKnockedOverPins / 2;
 		int pinsInSecondRoll = randomKnockedOverPins - pinsInFirstRoll;
@@ -93,14 +94,14 @@ class BowlingGameTest {
 	@Test
 	void countTotalScoreWithLastFrameSpare() {
 		int expectedScore = 68;
-		int amountOfRollsWithoutLastFrame = BowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
-		BowlingGame game = new BowlingGame();
+		int amountOfRollsWithoutLastFrame = TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
+		BowlingGame game = new TenPointBowlingGame();
 		for (int currentRoll = 1; currentRoll < amountOfRollsWithoutLastFrame; currentRoll++) {
 			game.nextRoll(3);
 		}
 		// roll a spare in the last frame
-		game.nextRoll(BowlingGame.AMOUNT_OF_PINS / 2);
-		game.nextRoll(BowlingGame.AMOUNT_OF_PINS / 2);
+		game.nextRoll(TenPointBowlingGame.AMOUNT_OF_PINS / 2);
+		game.nextRoll(TenPointBowlingGame.AMOUNT_OF_PINS / 2);
 
 		// and add a 21st bonus roll
 		game.nextRoll(4);
@@ -117,13 +118,13 @@ class BowlingGameTest {
 	@Test
 	void countTotalScoreWithLastFrameStrike() {
 		int expectedScore = 71;
-		int amountOfRollsWithoutLastFrame = BowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
-		BowlingGame game = new BowlingGame();
+		int amountOfRollsWithoutLastFrame = TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
+		BowlingGame game = new TenPointBowlingGame();
 		for (int currentRoll = 1; currentRoll < amountOfRollsWithoutLastFrame; currentRoll++) {
 			game.nextRoll(3);
 		}
 		// roll a strike in the last frame
-		game.nextRoll(BowlingGame.AMOUNT_OF_PINS);
+		game.nextRoll(TenPointBowlingGame.AMOUNT_OF_PINS);
 
 		// add the normal 20th roll
 		game.nextRoll(3);
@@ -142,14 +143,14 @@ class BowlingGameTest {
 	 */
 	@Test
 	void gameCorrectlyCountsBonusRollInLastFrame() {
-		BowlingGame firstGame = new BowlingGame();
+		BowlingGame firstGame = new TenPointBowlingGame();
 		int[] firstFullGameWithBonusRoll = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 10, 3, 4};
 		for (int i : firstFullGameWithBonusRoll) {
 			firstGame.nextRoll(i);
 		}
 		int firstGameTotalScore = firstGame.countScore();
 
-		BowlingGame secondGame = new BowlingGame();
+		BowlingGame secondGame = new TenPointBowlingGame();
 		int[] secondFullGameWithBonusRoll = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 10, 3, 2};
 		for (int i : secondFullGameWithBonusRoll) {
 			secondGame.nextRoll(i);
