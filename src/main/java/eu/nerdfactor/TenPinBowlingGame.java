@@ -6,7 +6,7 @@ import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
 /**
  * Implementation of {@link BowlingGame} for ten pin bowling.
  */
-public class TenPointBowlingGame implements BowlingGame {
+public class TenPinBowlingGame implements BowlingGame {
 
 	/**
 	 * The amount of maximum rolls in a game.The player has 2 rolls in
@@ -40,7 +40,7 @@ public class TenPointBowlingGame implements BowlingGame {
 	 */
 	private final int[] knockedOverPinsPerRoll;
 
-	public TenPointBowlingGame() {
+	public TenPinBowlingGame() {
 		this.currentRoll = 0;
 		this.knockedOverPinsPerRoll = new int[21];
 	}
