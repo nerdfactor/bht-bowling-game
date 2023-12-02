@@ -1,4 +1,4 @@
 package eu.nerdfactor.exceptions;
 
-public class MaxAmountOfRollsExceededException extends Throwable {
+public class MaxAmountOfRollsExceededException extends Exception {
 }
