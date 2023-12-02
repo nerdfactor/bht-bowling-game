@@ -20,6 +20,15 @@ public interface BowlingGame {
 	void nextRoll(int knockedOverPins) throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException;
 
 	/**
+	 * Executes multiple {@link #nextRoll(int)} in the game.
+	 *
+	 * @param knockedOverPins An array of the pins knocked over in the next rolls.
+	 * @throws WrongAmountOfPinsException        If a wrong amount off knocked over pins was passed.
+	 * @throws MaxAmountOfRollsExceededException If the maximum of rolls in the game was exceeded.
+	 */
+	void nextRolls(int[] knockedOverPins) throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException;
+
+	/**
 	 * Calculates the score for the game. It will check every frame knocked over pins and count
 	 * their score accordingly. Can be called multiple times during the game and provides the
 	 * correct score for the current game state.

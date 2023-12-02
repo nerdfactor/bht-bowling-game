@@ -65,6 +65,19 @@ public class TenPinBowlingGame implements BowlingGame {
 	}
 
 	/**
+	 * Executes multiple {@link #nextRoll(int)} in the game.
+	 *
+	 * @param knockedOverPins An array of the pins knocked over in the next rolls.
+	 * @throws WrongAmountOfPinsException        If a wrong amount off knocked over pins was passed.
+	 * @throws MaxAmountOfRollsExceededException If the maximum of rolls in the game was exceeded.
+	 */
+	public void nextRolls(int[] knockedOverPins) throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
+		for (int roll : knockedOverPins) {
+			nextRoll(roll);
+		}
+	}
+
+	/**
 	 * Check if the amount of knocked over pins is not possible.
 	 *
 	 * @param knockedOverPins The amount of knocked over pins.
