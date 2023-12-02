@@ -42,7 +42,7 @@ public class TenPinBowlingGame implements BowlingGame {
 
 	public TenPinBowlingGame() {
 		this.currentRoll = 0;
-		this.knockedOverPinsPerRoll = new int[21];
+		this.knockedOverPinsPerRoll = new int[AMOUNT_OF_MAX_ROLLS];
 	}
 
 	/**
