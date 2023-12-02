@@ -91,7 +91,7 @@ class BowlingGameTest {
 	 * 21st roll as a bonus roll.
 	 */
 	@Test
-	void countTotalScoreWithLastFrameSpare()  {
+	void countTotalScoreWithLastFrameSpare() {
 		int expectedScore = 68;
 		int amountOfRollsWithoutLastFrame = BowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
 		BowlingGame game = new BowlingGame();
@@ -115,7 +115,7 @@ class BowlingGameTest {
 	 * 21st roll as a bonus roll.
 	 */
 	@Test
-	void countTotalScoreWithLastFrameStrike(){
+	void countTotalScoreWithLastFrameStrike() {
 		int expectedScore = 71;
 		int amountOfRollsWithoutLastFrame = BowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
 		BowlingGame game = new BowlingGame();
@@ -133,6 +133,34 @@ class BowlingGameTest {
 
 		int totalScore = game.countScore();
 		Assertions.assertEquals(expectedScore, totalScore);
+	}
+
+	/**
+	 * Check if the total score of the game is counted correctly in the
+	 * edge case that the last frame is a strike by comparing to different
+	 * bonus rolls.
+	 */
+	@Test
+	void gameCorrectlyCountsBonusRollInLastFrame() {
+		BowlingGame firstGame = new BowlingGame();
+		int[] firstFullGameWithBonusRoll = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 10, 3, 4};
+		for (int i : firstFullGameWithBonusRoll) {
+			firstGame.nextRoll(i);
+		}
+		int firstGameTotalScore = firstGame.countScore();
+
+		BowlingGame secondGame = new BowlingGame();
+		int[] secondFullGameWithBonusRoll = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 10, 3, 2};
+		for (int i : secondFullGameWithBonusRoll) {
+			secondGame.nextRoll(i);
+		}
+		int secondGameTotalScore = secondGame.countScore();
+
+		int scoreDifferenceBetweenGames = secondGameTotalScore - firstGameTotalScore;
+		int expectedScoreDifferenceBetweenGames = secondFullGameWithBonusRoll[secondFullGameWithBonusRoll.length - 1] - firstFullGameWithBonusRoll[firstFullGameWithBonusRoll.length - 1];
+
+		Assertions.assertNotEquals(firstGameTotalScore, secondGameTotalScore);
+		Assertions.assertEquals(scoreDifferenceBetweenGames, expectedScoreDifferenceBetweenGames);
 	}
 
 }
