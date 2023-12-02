@@ -1,5 +1,7 @@
 import eu.nerdfactor.BowlingGame;
 import eu.nerdfactor.TenPointBowlingGame;
+import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ class BowlingGameTest {
 	 * Check if a game without any knocked over pins has a score of zero.
 	 */
 	@Test
-	void gameWithoutKnockedOverPinsHasScoreOfZero() {
+	void gameWithoutKnockedOverPinsHasScoreOfZero() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int expectedScore = 0;
 		BowlingGame game = new TenPointBowlingGame();
 		for (int i : new int[TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS]) {
@@ -26,7 +28,7 @@ class BowlingGameTest {
 	 * the same amount of knocked over pins for each roll.
 	 */
 	@Test
-	void countTotalScoreOfKnockedOverPins() {
+	void countTotalScoreOfKnockedOverPins() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int expectedScore = 60;
 		BowlingGame game = new TenPointBowlingGame();
 		for (int currentRoll = 1; currentRoll < TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll++) {
@@ -42,7 +44,7 @@ class BowlingGameTest {
 	 * * and two additional bonus rolls for the last frame being a strike.
 	 */
 	@Test
-	void countTotalScoreOfGameWithAllStrikes() {
+	void countTotalScoreOfGameWithAllStrikes() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int expectedScore = 300;
 		int amountOfFrames = TenPointBowlingGame.AMOUNT_OF_FRAMES + 2;
 		BowlingGame game = new TenPointBowlingGame();
@@ -58,7 +60,7 @@ class BowlingGameTest {
 	 * a random amount of knocked over pins without strikes.
 	 */
 	@Test
-	void countTotalScoreOfRandomKnockedOverPins() {
+	void countTotalScoreOfRandomKnockedOverPins() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException{
 		int expectedScore = 0;
 		BowlingGame game = new TenPointBowlingGame();
 		for (int currentRoll = 1; currentRoll < TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll += 2) {
@@ -76,7 +78,7 @@ class BowlingGameTest {
 	 * @param game The game that the rolls will be for.
 	 * @return The amount of randomly selected knocked over pins.
 	 */
-	private int rollRandomTestFrame(BowlingGame game) {
+	private int rollRandomTestFrame(BowlingGame game) throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int possibleKnockedOverPinsWithoutStrikes = TenPointBowlingGame.AMOUNT_OF_PINS - 1;
 		int randomKnockedOverPins = new Random().nextInt(0, possibleKnockedOverPinsWithoutStrikes);
 		int pinsInFirstRoll = randomKnockedOverPins / 2;
@@ -92,7 +94,7 @@ class BowlingGameTest {
 	 * 21st roll as a bonus roll.
 	 */
 	@Test
-	void countTotalScoreWithLastFrameSpare() {
+	void countTotalScoreWithLastFrameSpare() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int expectedScore = 68;
 		int amountOfRollsWithoutLastFrame = TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
 		BowlingGame game = new TenPointBowlingGame();
@@ -116,7 +118,7 @@ class BowlingGameTest {
 	 * 21st roll as a bonus roll.
 	 */
 	@Test
-	void countTotalScoreWithLastFrameStrike() {
+	void countTotalScoreWithLastFrameStrike() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int expectedScore = 71;
 		int amountOfRollsWithoutLastFrame = TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
 		BowlingGame game = new TenPointBowlingGame();
@@ -142,7 +144,7 @@ class BowlingGameTest {
 	 * bonus rolls.
 	 */
 	@Test
-	void gameCorrectlyCountsBonusRollInLastFrame() {
+	void gameCorrectlyCountsBonusRollInLastFrame() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		BowlingGame firstGame = new TenPointBowlingGame();
 		int[] firstFullGameWithBonusRoll = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 10, 3, 4};
 		for (int i : firstFullGameWithBonusRoll) {

@@ -1,5 +1,8 @@
 package eu.nerdfactor;
 
+import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
+
 /**
  * Implementation of {@link BowlingGame} for ten pin bowling.
  */
@@ -50,9 +53,34 @@ public class TenPointBowlingGame implements BowlingGame {
 	 * @param knockedOverPins The amount of pins that where knocked over in the roll.
 	 */
 	@Override
-	public void nextRoll(int knockedOverPins) {
+	public void nextRoll(int knockedOverPins) throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
+		if (wouldKnockOverWrongAmountOfPins(knockedOverPins)) {
+			throw new WrongAmountOfPinsException();
+		}
+		if (wouldExceedMaxRolls()) {
+			throw new MaxAmountOfRollsExceededException();
+		}
 		this.knockedOverPinsPerRoll[this.currentRoll] = knockedOverPins;
 		this.currentRoll++;
+	}
+
+	/**
+	 * Check if the amount of knocked over pins is not possible.
+	 *
+	 * @param knockedOverPins The amount of knocked over pins.
+	 * @return True if the amount of knocked over pins are not possible.
+	 */
+	private boolean wouldKnockOverWrongAmountOfPins(int knockedOverPins) {
+		return knockedOverPins < 0 || knockedOverPins > AMOUNT_OF_PINS;
+	}
+
+	/**
+	 * Check if the roll would exceed the maximum amount of rolls.
+	 *
+	 * @return True if the maximum amount is exceeded.
+	 */
+	private boolean wouldExceedMaxRolls() {
+		return this.currentRoll >= AMOUNT_OF_MAX_ROLLS;
 	}
 
 	/**

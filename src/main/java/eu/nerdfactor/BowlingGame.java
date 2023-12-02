@@ -1,5 +1,8 @@
 package eu.nerdfactor;
 
+import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
+
 /**
  * A bowling game that contains an amount of rolls that can knock over pins.
  * The knocked over pins will be counted by the specific scoring methods
@@ -14,7 +17,7 @@ public interface BowlingGame {
 	 *
 	 * @param knockedOverPins The amount of pins that where knocked over in the roll.
 	 */
-	void nextRoll(int knockedOverPins);
+	void nextRoll(int knockedOverPins) throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException;
 
 	/**
 	 * Calculates the score for the game. It will check every frame knocked over pins and count
