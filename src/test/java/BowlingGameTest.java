@@ -166,4 +166,31 @@ class BowlingGameTest {
 		Assertions.assertEquals(scoreDifferenceBetweenGames, expectedScoreDifferenceBetweenGames);
 	}
 
+	/**
+	 * Check if the game won't allow wrong amounts of knocked over pins
+	 * in a roll. Wrong amounts of knocked over pins are either negativ
+	 * or exceeding the {@link TenPointBowlingGame#AMOUNT_OF_PINS maximum amount of pins}.
+	 */
+	@Test
+	void gameWontAllowWrongAmountOfKnockedOverPins() {
+		TenPointBowlingGame game = new TenPointBowlingGame();
+		Assertions.assertThrows(WrongAmountOfPinsException.class, () -> game.nextRoll(TenPointBowlingGame.AMOUNT_OF_PINS + 1));
+		Assertions.assertThrows(WrongAmountOfPinsException.class, () -> game.nextRoll(-1));
+	}
+
+	/**
+	 * Check if a game won't allow to exceed the
+	 * {@link TenPointBowlingGame#AMOUNT_OF_MAX_ROLLS maximum amount of rolls}.
+	 */
+	@Test
+	void gameWontExceedMaxAmountOfRolls() {
+		int amountOfRolls = TenPointBowlingGame.AMOUNT_OF_MAX_ROLLS + 1;
+		TenPointBowlingGame game = new TenPointBowlingGame();
+		Assertions.assertThrows(MaxAmountOfRollsExceededException.class, () -> {
+			for (int currentRoll : new int[amountOfRolls]) {
+				game.nextRoll(currentRoll);
+			}
+		});
+	}
+
 }
