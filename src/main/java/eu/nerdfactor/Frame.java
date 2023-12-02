@@ -38,6 +38,7 @@ public class Frame {
 	 * @return True if the Frame is played.
 	 */
 	public boolean isPlayed() {
-		return this.knockedOverPins[1] != 0;
+
+		return this.knockedOverPins[1] != 0 || this.countScore() == 10;
 	}
 }
