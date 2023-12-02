@@ -1,7 +1,5 @@
 package eu.nerdfactor.bowling;
 
-import eu.nerdfactor.bowling.BowlingGame;
-import eu.nerdfactor.bowling.TenPinBowlingGame;
 import eu.nerdfactor.bowling.exceptions.MaxAmountOfRollsExceededException;
 import eu.nerdfactor.bowling.exceptions.WrongAmountOfPinsException;
 import org.junit.jupiter.api.Assertions;
@@ -62,7 +60,7 @@ class BowlingGameTest {
 	 * a random amount of knocked over pins without strikes.
 	 */
 	@Test
-	void countTotalScoreOfRandomKnockedOverPins() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException{
+	void countTotalScoreOfRandomKnockedOverPins() throws WrongAmountOfPinsException, MaxAmountOfRollsExceededException {
 		int expectedScore = 0;
 		BowlingGame game = new TenPinBowlingGame();
 		for (int currentRoll = 1; currentRoll < TenPinBowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll += 2) {
