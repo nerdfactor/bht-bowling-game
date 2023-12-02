@@ -1,7 +1,9 @@
-import eu.nerdfactor.BowlingGame;
-import eu.nerdfactor.TenPinBowlingGame;
-import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
-import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
+package eu.nerdfactor.bowling;
+
+import eu.nerdfactor.bowling.BowlingGame;
+import eu.nerdfactor.bowling.TenPinBowlingGame;
+import eu.nerdfactor.bowling.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.bowling.exceptions.WrongAmountOfPinsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
-package eu.nerdfactor;
+package eu.nerdfactor.bowling;
 
-import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
-import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
+import eu.nerdfactor.bowling.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.bowling.exceptions.WrongAmountOfPinsException;
 
 /**
  * Implementation of {@link BowlingGame} for ten pin bowling.

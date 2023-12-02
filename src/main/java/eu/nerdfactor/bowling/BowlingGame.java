@@ -1,7 +1,7 @@
-package eu.nerdfactor;
+package eu.nerdfactor.bowling;
 
-import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
-import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
+import eu.nerdfactor.bowling.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.bowling.exceptions.WrongAmountOfPinsException;
 
 /**
  * A bowling game that contains an amount of rolls that can knock over pins.

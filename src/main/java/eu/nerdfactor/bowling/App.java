@@ -1,7 +1,7 @@
-package eu.nerdfactor;
+package eu.nerdfactor.bowling;
 
-import eu.nerdfactor.exceptions.MaxAmountOfRollsExceededException;
-import eu.nerdfactor.exceptions.WrongAmountOfPinsException;
+import eu.nerdfactor.bowling.exceptions.MaxAmountOfRollsExceededException;
+import eu.nerdfactor.bowling.exceptions.WrongAmountOfPinsException;
 
 import java.util.Arrays;
 
