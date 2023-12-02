@@ -85,4 +85,54 @@ class BowlingGameTest {
 		return randomKnockedOverPins;
 	}
 
+	/**
+	 * Check if the total score of the game is counted correctly in the
+	 * edge case that the last frame is a spare. This must include one
+	 * 21st roll as a bonus roll.
+	 */
+	@Test
+	void countTotalScoreWithLastFrameSpare()  {
+		int expectedScore = 68;
+		int amountOfRollsWithoutLastFrame = BowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
+		BowlingGame game = new BowlingGame();
+		for (int currentRoll = 1; currentRoll < amountOfRollsWithoutLastFrame; currentRoll++) {
+			game.nextRoll(3);
+		}
+		// roll a spare in the last frame
+		game.nextRoll(BowlingGame.AMOUNT_OF_PINS / 2);
+		game.nextRoll(BowlingGame.AMOUNT_OF_PINS / 2);
+
+		// and add a 21st bonus roll
+		game.nextRoll(4);
+
+		int totalScore = game.countScore();
+		Assertions.assertEquals(expectedScore, totalScore);
+	}
+
+	/**
+	 * Check if the total score of the game is counted correctly in the
+	 * edge case that the last frame is a strike. This must include one
+	 * 21st roll as a bonus roll.
+	 */
+	@Test
+	void countTotalScoreWithLastFrameStrike(){
+		int expectedScore = 71;
+		int amountOfRollsWithoutLastFrame = BowlingGame.AMOUNT_OF_MAX_ROLLS - 2;
+		BowlingGame game = new BowlingGame();
+		for (int currentRoll = 1; currentRoll < amountOfRollsWithoutLastFrame; currentRoll++) {
+			game.nextRoll(3);
+		}
+		// roll a strike in the last frame
+		game.nextRoll(BowlingGame.AMOUNT_OF_PINS);
+
+		// add the normal 20th roll
+		game.nextRoll(3);
+
+		// and add a 21st bonus roll
+		game.nextRoll(4);
+
+		int totalScore = game.countScore();
+		Assertions.assertEquals(expectedScore, totalScore);
+	}
+
 }
