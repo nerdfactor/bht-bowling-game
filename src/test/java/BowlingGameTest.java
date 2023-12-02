@@ -10,9 +10,8 @@ class BowlingGameTest {
 	@Test
 	void gameWithoutKnockedOverPinsHasScoreOfZero() {
 		int expectedScore = 0;
-		int amountOfRolls = 20;
 		BowlingGame game = new BowlingGame();
-		for (int i : new int[amountOfRolls]) {
+		for (int i : new int[BowlingGame.AMOUNT_OF_MAX_ROLLS]) {
 			game.nextRoll(i);
 		}
 		int totalScore = game.countScore();
@@ -26,12 +25,29 @@ class BowlingGameTest {
 	@Test
 	void countTotalScoreOfKnockedOverPins() {
 		int expectedScore = 60;
-		int amountOfRolls = 20;
 		BowlingGame game = new BowlingGame();
-		for (int currentRoll = 0; currentRoll < amountOfRolls; currentRoll++) {
+		for (int currentRoll = 1; currentRoll < BowlingGame.AMOUNT_OF_MAX_ROLLS; currentRoll++) {
 			game.nextRoll(3);
 		}
 		int totalScore = game.countScore();
 		Assertions.assertEquals(expectedScore, totalScore);
 	}
+
+	/**
+	 * Check if the total score of the game is counted correctly if all
+	 * rolls are strikes. The amount of rolls will be one for each frame
+	 * * and two additional bonus rolls for the last frame being a strike.
+	 */
+	@Test
+	void countTotalScoreOfGameWithAllStrikes() {
+		int expectedScore = 300;
+		int amountOfFrames = BowlingGame.AMOUNT_OF_FRAMES + 2;
+		BowlingGame game = new BowlingGame();
+		for (int currentRoll = 0; currentRoll < amountOfFrames; currentRoll++) {
+			game.nextRoll(10);
+		}
+		int totalScore = game.countScore();
+		Assertions.assertEquals(expectedScore, totalScore);
+	}
+
 }
