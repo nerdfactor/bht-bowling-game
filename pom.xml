@@ -7,7 +7,7 @@
 	<groupId>eu.nerdfactor</groupId>
 	<artifactId>bowling-game</artifactId>
 	<description>Simple implementation of the bowling game code kata.</description>
-	<version>1.2.0</version>
+	<version>1.0.0</version>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
